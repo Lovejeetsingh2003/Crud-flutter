@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:crud/crud_object.dart';
 import 'package:crud/data_object.dart';
 import 'package:flutter/material.dart';
