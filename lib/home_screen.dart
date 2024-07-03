@@ -1,5 +1,6 @@
 import 'package:crud/crud_object.dart';
 import 'package:crud/data_object.dart';
+import 'package:crud/db_provider.dart';
 import 'package:crud/dialog_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,17 +15,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   var list = <CrudObject>[];
   var object = <DataObject>[];
+  var dbProvider = DbProvider();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.black,
         title: const Text(
           "Crud",
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
@@ -32,23 +35,23 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Expanded(
         child: ListView.builder(
             shrinkWrap: true,
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             itemCount: list.length,
             itemBuilder: (context, index) {
               var values = list[index];
               return Container(
                 color: Colors.pink.shade100,
-                padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           child: Text(
                             values.name ?? "",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w500,
                               color: Colors.black,
@@ -59,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.all(5),
                           child: Text(
                             values.rollNo.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w500,
                               color: Colors.black,
@@ -67,10 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           child: Text(
                             values.phoneNo ?? "",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w500,
                               color: Colors.black,
@@ -101,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 setState(() {});
                               });
                             },
-                            child: Icon(
+                            child: const Icon(
                               Icons.edit,
                               color: Colors.black,
                               size: 30,
@@ -113,8 +116,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             list.remove(values);
                             setState(() {});
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
+                          child: const Padding(
+                            padding: EdgeInsets.all(10),
                             child: Icon(
                               Icons.delete,
                               color: Colors.black,
@@ -134,23 +137,26 @@ class _HomeScreenState extends State<HomeScreen> {
           showDialog(
             barrierDismissible: false,
             context: context,
-            builder: (context) => DialogScreen("", "", ""),
+            builder: (context) => const DialogScreen("", "", ""),
           ).then((value) {
             var object = value as DataObject;
             var name = object.name;
             var roll_no = object.rollNo;
             var phone_no = object.phoneNo;
+            CrudObject crudObject =
+                CrudObject(name: name, phoneNo: phone_no, rollNo: roll_no);
+            dbProvider.insertDb(crudObject);
             list.add(
                 CrudObject(name: name, rollNo: roll_no, phoneNo: phone_no));
             setState(() {});
           });
         },
-        child: Icon(
+        backgroundColor: Colors.black,
+        child: const Icon(
           Icons.add,
           size: 30,
           color: Colors.white,
         ),
-        backgroundColor: Colors.black,
       ),
     );
   }

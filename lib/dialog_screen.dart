@@ -43,12 +43,12 @@ class _DialogScreenState extends State<DialogScreen> {
             padding: const EdgeInsets.all(10),
             child: TextField(
               controller: nameController,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
                 color: Colors.black,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Enter your name",
                 hintStyle: TextStyle(
                   fontSize: 22,
@@ -69,12 +69,12 @@ class _DialogScreenState extends State<DialogScreen> {
             child: TextField(
               keyboardType: TextInputType.number,
               controller: rollNoController,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
                 color: Colors.black,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Enter your Roll no.",
                 hintStyle: TextStyle(
                   fontSize: 22,
@@ -96,12 +96,12 @@ class _DialogScreenState extends State<DialogScreen> {
               keyboardType: TextInputType.number,
               maxLength: 10,
               controller: phoneNoController,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
                 color: Colors.black,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Enter your Phone no.",
                 hintStyle: TextStyle(
                   fontSize: 22,
@@ -138,6 +138,7 @@ class _DialogScreenState extends State<DialogScreen> {
                     int.parse(rollNoController.text.toString()),
                     phoneNoController.text.toString(),
                   );
+
                   Navigator.of(context).pop(object);
                   setState(() {});
                 }
@@ -146,7 +147,7 @@ class _DialogScreenState extends State<DialogScreen> {
                 padding: const EdgeInsets.all(10),
                 child: Text(
                   task,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w500,
                       color: Colors.white),
