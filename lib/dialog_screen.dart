@@ -133,10 +133,10 @@ class _DialogScreenState extends State<DialogScreen> {
                 } else if (phoneNoController.text.length < 10) {
                   Fluttertoast.showToast(msg: "Enter the valid Phone no.");
                 } else {
-                  var object = DataObject(
-                    nameController.text.toString(),
-                    int.parse(rollNoController.text.toString()),
-                    phoneNoController.text.toString(),
+                  var object = CrudObject(
+                    name: nameController.text.toString(),
+                    rollNo: int.parse(rollNoController.text.toString()),
+                    phoneNo: phoneNoController.text.toString(),
                   );
 
                   Navigator.of(context).pop(object);
