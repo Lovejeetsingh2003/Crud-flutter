@@ -138,7 +138,6 @@ class _DialogScreenState extends State<DialogScreen> {
                     rollNo: int.parse(rollNoController.text.toString()),
                     phoneNo: phoneNoController.text.toString(),
                   );
-
                   Navigator.of(context).pop(object);
                   setState(() {});
                 }

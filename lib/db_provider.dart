@@ -24,7 +24,10 @@ class DbProvider {
           onCreate: (db, version) async {
             await db.execute(
                 "CREATE TABLE crudDb(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, rollNo INTEGER, phoneNo TEXT)");
+            await db.execute(
+                "CREATE TABLE crudItems(id INTEGER PRIMARY KEY AUTOINCREMENT, task TEXT, isCompleted BOOLEAN, taskId INTEGER REFERENCES crudDb(id))");
           },
+          // second syntax (taskId INTEGER FOREIGN KEY(taskId) REFERENCE crudDb(id))
         ),
       );
     } else {
@@ -32,6 +35,8 @@ class DbProvider {
       return openDatabase(path, version: 1, onCreate: (db, version) async {
         await db.execute(
             "CREATE TABLE crudDb(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, rollNo INTEGER, phoneNo TEXT)");
+        await db.execute(
+            "CREATE TABLE crudItems(id INTEGER PRIMARY KEY AUTOINCREMENT, task TEXT, isCompleted BOOLEAN, taskId INTEGER REFERENCES crudDb(id))");
       });
     }
     // }
