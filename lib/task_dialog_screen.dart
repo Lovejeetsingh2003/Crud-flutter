@@ -1,7 +1,15 @@
+import 'package:crud/crud_object.dart';
+import 'package:crud/task_object.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class TaskDialogScreen extends StatefulWidget {
-  const TaskDialogScreen({super.key});
+  final id;
+  const TaskDialogScreen(
+    this.id, {
+    super.key,
+  });
 
   @override
   State<TaskDialogScreen> createState() => _TaskDialogScreenState();
@@ -9,6 +17,7 @@ class TaskDialogScreen extends StatefulWidget {
 
 class _TaskDialogScreenState extends State<TaskDialogScreen> {
   var taskController = TextEditingController();
+
   var ischecked = false;
   @override
   Widget build(BuildContext context) {
@@ -26,7 +35,7 @@ class _TaskDialogScreenState extends State<TaskDialogScreen> {
                 color: Colors.black,
               ),
               decoration: const InputDecoration(
-                hintText: "Enter your name",
+                hintText: "Enter your task",
                 hintStyle: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w500,
@@ -56,7 +65,17 @@ class _TaskDialogScreenState extends State<TaskDialogScreen> {
             padding: const EdgeInsets.all(10),
             child: ElevatedButton(
               style: TextButton.styleFrom(backgroundColor: Colors.black),
-              onPressed: () {},
+              onPressed: () {
+                if (taskController.text.isEmpty) {
+                  Fluttertoast.showToast(msg: "Enter the task");
+                } else {
+                  var object = TaskObject(
+                      isCompleted: ischecked,
+                      task: taskController.text.toString(),
+                      taskId: widget.id);
+                  Navigator.of(context).pop(object);
+                }
+              },
               child: const Text(
                 "Save",
                 style: TextStyle(

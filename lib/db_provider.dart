@@ -1,4 +1,5 @@
 import 'package:crud/crud_object.dart';
+import 'package:crud/task_object.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
@@ -46,6 +47,11 @@ class DbProvider {
   void insertDb(CrudObject crudObject) async {
     var db = await createDb();
     db.insert("crudDb", crudObject.toJson());
+  }
+
+  void insertTaskDb(TaskObject taskObject) async {
+    var db = await createDb();
+    db.insert("crudItems", taskObject.toJson());
   }
 
 // get db
